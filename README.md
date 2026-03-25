@@ -92,12 +92,12 @@ The Power BI dashboard provides a comprehensive view of EV market trends through
 ## 📂 Project Structure
 EVision-Analytics/
 │
-├── ev_data_cleaning.ipynb
-├── ev_etl_and_sql_analysis.ipynb
-├── ev_postgresql_queries.sql
-├── Dashboard.pbix
-├── dashboard_screenshot.png
-└── README.md
+├── 📓 ev_data_cleaning.ipynb # Data cleaning & preprocessing (Pandas)
+├── 📊 ev_etl_and_sql_analysis.ipynb # ETL pipeline + exploratory analysis
+├── 🛢️ ev_postgresql_queries.sql # SQL queries (aggregations, KPIs, insights)
+├── 📈 Dashboard.pbix # Power BI dashboard file
+├── 🖼️ dashboard_screenshot.png # Dashboard preview image
+└── 📄 README.md # Project documentation
 
 ---
 
