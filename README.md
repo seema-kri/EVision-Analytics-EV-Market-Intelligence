@@ -90,7 +90,6 @@ The Power BI dashboard provides a comprehensive view of EV market trends through
 ---
 
 ## 📂 Project Structure
-EVision-Analytics/
 
 - 📓 [ev_data_cleaning.ipynb](./ev_data_cleaning.ipynb)  
   → Data cleaning & preprocessing using Pandas  
