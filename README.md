@@ -7,7 +7,7 @@
 ![Records](https://img.shields.io/badge/279K%20Records-1D9E75?style=flat-square)
 ![Pipeline](https://img.shields.io/badge/Full%20ETL%20Pipeline-555?style=flat-square)
 
-> **The real EV adoption bottleneck isn't demand — it's charging infrastructure.**  
+> **The real EV adoption bottleneck isn't demand — it's charging infrastructure.**
 > Proved with 279,780 real vehicle registrations across a full Python → PostgreSQL → Power BI pipeline.
 
 ---
@@ -18,11 +18,11 @@
 
 ---
 
-## 🏢 Business Problem
+## 🏢 Business Context
 
-EV policy makers, investors, and automotive analysts are making billion-dollar decisions — fleet investments, infrastructure rollouts, incentive programs — without a clear picture of who is actually buying EVs, where, and what the real adoption curve looks like.
+EV policy makers, fleet investors, and automotive analysts are making billion-dollar decisions — infrastructure rollouts, incentive programs — without a clear picture of who is actually buying EVs, where, and what the real adoption curve looks like.
 
-**The questions that needed answering:**
+**Five critical questions this project answers:**
 - Which manufacturers dominate — and is competition even possible?
 - Has mass EV adoption actually started, or is it still niche?
 - Is the market moving toward full BEV or staying on PHEV as a crutch?
@@ -31,10 +31,28 @@ EV policy makers, investors, and automotive analysts are making billion-dollar d
 
 ---
 
-## 🗂️ Data
+## 📊 Executive Summary
 
-**Source:** Washington State DMV — Electric Vehicle Population Data (public dataset)  
-**Volume:** 279,780 registered electric vehicles  
+| Metric | Value |
+|--------|-------|
+| Total registered EVs | **279,780** |
+| BEV market share | **80%** |
+| PHEV market share | **20%** |
+| Tesla market share | **41%** (115K vehicles) |
+| #2 manufacturer — Chevrolet | **7%** (19K vehicles) |
+| Model Y + Model 3 combined | **35% of entire market** |
+| Average electric range | **39.17 miles** |
+| Peak adoption year | **2023 — ~60K registrations** |
+| Post-2020 growth | **3–4× surge** |
+
+**Core finding:** 80% BEV share means charging infrastructure — not demand — is now the ceiling on further EV adoption. Every dollar invested in fast-charging unlocks more growth than any additional manufacturer incentive.
+
+---
+
+## 🗂️ Data Structure
+
+**Source:** Washington State DMV — Electric Vehicle Population Data (public dataset)
+**Volume:** 279,780 registered electric vehicles
 
 | Column | Description |
 |--------|-------------|
@@ -45,10 +63,10 @@ EV policy makers, investors, and automotive analysts are making billion-dollar d
 | `Electric Range` | Range in miles |
 | `CAFV Eligibility` | Clean Alternative Fuel Vehicle status |
 
-**Engineered columns added during cleaning:**
+**Engineered features added during cleaning:**
 
-| Column | Logic | Why |
-|--------|-------|-----|
+| Column | Logic | Purpose |
+|--------|-------|---------|
 | `ev_category` | Standardised from Electric Vehicle Type | Clean BEV / PHEV labels for grouping |
 | `vehicle_age` | `2026 − Model Year` | Age-based fleet segmentation |
 | `range_group` | Low / Medium / High thresholds | Range tier analysis across brands |
@@ -79,27 +97,11 @@ Power BI
 
 ---
 
-## 📌 Key Metrics
+## 🔍 Insights Deep Dive
 
-| Metric | Value |
-|--------|-------|
-| Total registered EVs | **279,780** |
-| BEV market share | **80%** |
-| PHEV market share | **20%** |
-| Tesla market share | **41%** (115K vehicles) |
-| #2 manufacturer (Chevrolet) | **7%** (19K vehicles) |
-| Model Y + Model 3 combined | **35% of entire market** |
-| Average electric range | **39.17 miles** |
-| Peak adoption year | **2023 — ~60K registrations** |
-| Post-2020 growth | **3–4× surge** |
+### 1 — Tesla doesn't lead the market. It owns it.
 
----
-
-## 🔍 Insights
-
-### 1 — Tesla isn't leading the market. It owns it.
-
-Tesla's 41% share vs. Chevrolet's 7% is not a competitive lead — it is a **structural moat**. The gap between #1 and #2 is larger than Chevrolet's entire EV fleet. This is driven by Supercharger network density, OTA software updates, and ecosystem lock-in — not just product quality. Traditional OEMs are competing on hardware. Tesla competes on an integrated platform.
+Tesla's 41% share vs. Chevrolet's 7% is not a competitive lead — it is a **structural moat**. The gap between #1 and #2 is larger than Chevrolet's entire EV fleet. This is driven by Supercharger network density, OTA software updates, and ecosystem lock-in — not just product quality.
 
 > **Implication:** The EV market is winner-take-most, not winner-take-all. New entrants need a differentiated ecosystem play, not just a better car.
 
@@ -107,7 +109,7 @@ Tesla's 41% share vs. Chevrolet's 7% is not a competitive lead — it is a **str
 
 ### 2 — The post-2020 inflection is structural, not cyclical.
 
-Registrations: ~11K (2019) → ~14K (2020) → ~60K (2023). A 3–4× surge in 3 years does not happen by accident. It aligns directly with the US Federal EV tax credit expansion, California ZEV mandates, and major automakers committing publicly to full electrification by 2030. This is policy-triggered acceleration that will compound forward — it will not revert to pre-2020 baseline.
+Registrations: ~11K (2019) → ~14K (2020) → ~60K (2023). A 3–4× surge in 3 years aligns directly with the US Federal EV tax credit expansion, California ZEV mandates, and major automakers committing publicly to full electrification by 2030. This is policy-triggered acceleration that will compound forward — it will not revert to pre-2020 baseline.
 
 > **Implication:** Demand is not the risk. Infrastructure is.
 
@@ -131,9 +133,9 @@ Model Y (60K) + Model 3 (38K) = 98K registrations. The entire Chevrolet + Nissan
 
 ### 5 — Average range of 39 miles masks a fleet in rapid transition.
 
-The 39.17-mile average is pulled down by the large PHEV population (20–50 mile electric range) and older BEV models still in the registration pool. When segmented by range tier, the High Range (>250mi) tier — dominated by Tesla Model Y, Model 3, and newer BEVs — is growing fastest. The average actually understates how capable the current incoming fleet is.
+The 39.17-mile average is pulled down by the large PHEV population (20–50 mile electric range) and older BEV models still in the registration pool. The High Range (>250mi) tier — dominated by Tesla Model Y, Model 3, and newer BEVs — is growing fastest. Range anxiety is a legacy concern.
 
-> **Implication:** Range anxiety is a legacy concern. The incoming fleet has largely solved it. Charging speed and availability is the next UX frontier.
+> **Implication:** The incoming fleet has largely solved range. Charging speed and availability is the next UX frontier.
 
 ---
 
@@ -222,15 +224,15 @@ ORDER BY "Model Year", ev_category;
 | 🔴 Critical | Invest immediately in fast-charging infrastructure in top EV states | BEV = 80% — charging is the adoption ceiling, not demand |
 | 🟠 High | Target suburban + smaller cities for next-wave EV incentive programs | Urban concentration confirmed — whitespace identified in data |
 | 🟠 High | OEMs: consolidate to 2–3 flagship EV models, stop proliferating variants | Tesla 2-model strategy outperforms all multi-SKU OEM approaches |
-| 🟡 Medium | Extend CAFV incentives to Medium-range BEVs (100–250mi) | Largest addressable segment by volume — currently underserved |
+| 🟡 Medium | Extend CAFV incentives to medium-range BEVs (100–250mi) | Largest addressable segment by volume — currently underserved |
 | 🟢 Ongoing | Track BEV vs PHEV ratio per brand year-over-year | Wide variation across OEMs in electrification commitment and pace |
 
 ---
 
-## ⚠️ Caveats
+## ⚠️ Caveats & Assumptions
 
 - **Washington State only** — one of the most EV-progressive US states. National numbers would show lower BEV share and slower adoption. Do not extrapolate directly.
-- **2024–2025 apparent decline** — data completeness issue, not a real market slowdown. Newer registrations not fully captured yet.
+- **2024–2025 apparent decline** — data completeness issue, not a real market slowdown. Newer registrations not yet fully captured.
 - **39-mile average is PHEV-weighted** — pure BEV average range is significantly higher.
 - **No pricing data** — premium vs. mass-market segmentation inferred from brand positioning, not transaction price.
 
@@ -249,7 +251,7 @@ ORDER BY "Model Year", ev_category;
 
 ---
 
-## 📁 Repository
+## 📁 Repository Structure
 
 ```
 ev-market-intelligence/
