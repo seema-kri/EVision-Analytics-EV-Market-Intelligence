@@ -1,4 +1,5 @@
 # ⚡ EVision — EV Market Intelligence
+### Full-Stack Market Analytics — Python ETL → PostgreSQL → Power BI
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat-square&logo=postgresql&logoColor=white)
@@ -12,13 +13,13 @@
 
 ---
 
-## 📸 Dashboard
+## Dashboard
 
 ![EV Market Intelligence Dashboard](dashboard_screenshot.png)
 
 ---
 
-## 🏢 Business Context
+## Business Context
 
 EV policy makers, fleet investors, and automotive analysts are making billion-dollar decisions — infrastructure rollouts, incentive programs — without a clear picture of who is actually buying EVs, where, and what the real adoption curve looks like.
 
@@ -31,10 +32,10 @@ EV policy makers, fleet investors, and automotive analysts are making billion-do
 
 ---
 
-## 📊 Executive Summary
+## Executive Summary
 
 | Metric | Value |
-|--------|-------|
+|---|---|
 | Total registered EVs | **279,780** |
 | BEV market share | **80%** |
 | PHEV market share | **20%** |
@@ -49,13 +50,13 @@ EV policy makers, fleet investors, and automotive analysts are making billion-do
 
 ---
 
-## 🗂️ Data Structure
+## Data Structure
 
 **Source:** Washington State DMV — Electric Vehicle Population Data (public dataset)
 **Volume:** 279,780 registered electric vehicles
 
 | Column | Description |
-|--------|-------------|
+|---|---|
 | `Make`, `Model` | Manufacturer and model name |
 | `Model Year` | Year of manufacture |
 | `State`, `County`, `City` | Registration geography |
@@ -66,14 +67,14 @@ EV policy makers, fleet investors, and automotive analysts are making billion-do
 **Engineered features added during cleaning:**
 
 | Column | Logic | Purpose |
-|--------|-------|---------|
+|---|---|---|
 | `ev_category` | Standardised from Electric Vehicle Type | Clean BEV / PHEV labels for grouping |
 | `vehicle_age` | `2026 − Model Year` | Age-based fleet segmentation |
 | `range_group` | Low / Medium / High thresholds | Range tier analysis across brands |
 
 ---
 
-## 🏗️ Pipeline
+## Pipeline
 
 ```
 Raw CSV — 279,780 rows
@@ -97,11 +98,11 @@ Power BI
 
 ---
 
-## 🔍 Insights Deep Dive
+## Insights Deep Dive
 
 ### 1 — Tesla doesn't lead the market. It owns it.
 
-Tesla's 41% share vs. Chevrolet's 7% is not a competitive lead — it is a **structural moat**. The gap between #1 and #2 is larger than Chevrolet's entire EV fleet. This is driven by Supercharger network density, OTA software updates, and ecosystem lock-in — not just product quality.
+Tesla's 41% share vs. Chevrolet's 7% is not a competitive lead — it is a structural moat. The gap between #1 and #2 is larger than Chevrolet's entire EV fleet. This is driven by Supercharger network density, OTA software updates, and ecosystem lock-in, not just product quality.
 
 > **Implication:** The EV market is winner-take-most, not winner-take-all. New entrants need a differentiated ecosystem play, not just a better car.
 
@@ -109,7 +110,7 @@ Tesla's 41% share vs. Chevrolet's 7% is not a competitive lead — it is a **str
 
 ### 2 — The post-2020 inflection is structural, not cyclical.
 
-Registrations: ~11K (2019) → ~14K (2020) → ~60K (2023). A 3–4× surge in 3 years aligns directly with the US Federal EV tax credit expansion, California ZEV mandates, and major automakers committing publicly to full electrification by 2030. This is policy-triggered acceleration that will compound forward — it will not revert to pre-2020 baseline.
+Registrations: ~11K (2019) → ~14K (2020) → ~60K (2023). A 3–4× surge in three years aligns directly with the US Federal EV tax credit expansion, California ZEV mandates, and major automakers committing publicly to full electrification by 2030. This is policy-triggered acceleration that will compound forward — it will not revert to pre-2020 baseline.
 
 > **Implication:** Demand is not the risk. Infrastructure is.
 
@@ -117,7 +118,7 @@ Registrations: ~11K (2019) → ~14K (2020) → ~60K (2023). A 3–4× surge in 3
 
 ### 3 — 80% BEV makes charging infrastructure the #1 adoption constraint.
 
-4 out of 5 registered EVs are fully battery-electric. PHEVs can fall back on petrol. BEVs cannot. At 80% BEV share, charging network density is now a **direct ceiling** on further adoption — especially in suburban and rural areas where home charging is not always an option.
+Four out of five registered EVs are fully battery-electric. PHEVs can fall back on petrol; BEVs cannot. At 80% BEV share, charging network density is now a direct ceiling on further adoption, especially in suburban and rural areas where home charging isn't always an option.
 
 > **Implication:** Every dollar invested in charging infrastructure unlocks more EV adoption than any additional manufacturer incentive.
 
@@ -139,7 +140,7 @@ The 39.17-mile average is pulled down by the large PHEV population (20–50 mile
 
 ---
 
-## 🧪 SQL Analysis
+## SQL Analysis
 
 **Volume check & BEV/PHEV split**
 ```sql
@@ -204,7 +205,7 @@ GROUP BY range_segment
 ORDER BY total DESC;
 ```
 
-**BEV vs PHEV % by year — PARTITION BY year**
+**BEV vs. PHEV % by year — PARTITION BY year**
 ```sql
 SELECT
     "Model Year", ev_category,
@@ -217,31 +218,31 @@ ORDER BY "Model Year", ev_category;
 
 ---
 
-## 🎯 Recommendations
+## Recommendations
 
 | Priority | Recommendation | Based On |
-|----------|---------------|----------|
-| 🔴 Critical | Invest immediately in fast-charging infrastructure in top EV states | BEV = 80% — charging is the adoption ceiling, not demand |
-| 🟠 High | Target suburban + smaller cities for next-wave EV incentive programs | Urban concentration confirmed — whitespace identified in data |
-| 🟠 High | OEMs: consolidate to 2–3 flagship EV models, stop proliferating variants | Tesla 2-model strategy outperforms all multi-SKU OEM approaches |
-| 🟡 Medium | Extend CAFV incentives to medium-range BEVs (100–250mi) | Largest addressable segment by volume — currently underserved |
-| 🟢 Ongoing | Track BEV vs PHEV ratio per brand year-over-year | Wide variation across OEMs in electrification commitment and pace |
+|---|---|---|
+| Critical | Invest immediately in fast-charging infrastructure in top EV states | BEV = 80% — charging is the adoption ceiling, not demand |
+| High | Target suburban + smaller cities for next-wave EV incentive programs | Urban concentration confirmed — whitespace identified in data |
+| High | OEMs: consolidate to 2–3 flagship EV models, stop proliferating variants | Tesla's 2-model strategy outperforms all multi-SKU OEM approaches |
+| Medium | Extend CAFV incentives to medium-range BEVs (100–250mi) | Largest addressable segment by volume, currently underserved |
+| Ongoing | Track BEV vs. PHEV ratio per brand year-over-year | Wide variation across OEMs in electrification commitment and pace |
 
 ---
 
-## ⚠️ Caveats & Assumptions
+## Caveats & Assumptions
 
-- **Washington State only** — one of the most EV-progressive US states. National numbers would show lower BEV share and slower adoption. Do not extrapolate directly.
-- **2024–2025 apparent decline** — data completeness issue, not a real market slowdown. Newer registrations not yet fully captured.
+- **Washington State only** — one of the most EV-progressive US states. National numbers would show lower BEV share and slower adoption; do not extrapolate directly.
+- **2024–2025 apparent decline** — a data completeness issue, not a real market slowdown. Newer registrations are not yet fully captured.
 - **39-mile average is PHEV-weighted** — pure BEV average range is significantly higher.
-- **No pricing data** — premium vs. mass-market segmentation inferred from brand positioning, not transaction price.
+- **No pricing data** — premium vs. mass-market segmentation is inferred from brand positioning, not transaction price.
 
 ---
 
-## 🛠️ Tools
+## Tools
 
 | Tool | Purpose |
-|------|---------|
+|---|---|
 | Python (Pandas) | Ingestion, cleaning, null handling, feature engineering |
 | PostgreSQL | ETL destination, SQL analysis layer |
 | SQLAlchemy + psycopg2 | Python → PostgreSQL connection and load |
@@ -251,22 +252,25 @@ ORDER BY "Model Year", ev_category;
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 ev-market-intelligence/
-├── 📊 Dashboard.pbix                  ← Power BI dashboard
-├── 📄 EVision_Analytics.pdf           ← PDF dashboard export
-├── 🖼️ dashboard_screenshot.png        ← dashboard preview
-├── 🐍 ev_data_cleaning.ipynb          ← cleaning & feature engineering
-├── 🐍 ev_etl_and_sql_analysis.ipynb   ← ETL pipeline + SQL analysis
-├── 🗄️ ev_postgresql_queries.sql       ← all standalone SQL queries
+├── Dashboard.pbix                  ← Power BI dashboard
+├── EVision_Analytics.pdf           ← PDF dashboard export
+├── dashboard_screenshot.png        ← dashboard preview
+├── ev_data_cleaning.ipynb          ← cleaning & feature engineering
+├── ev_etl_and_sql_analysis.ipynb   ← ETL pipeline + SQL analysis
+├── ev_postgresql_queries.sql       ← all standalone SQL queries
 └── README.md
 ```
 
 ---
 
-## 🤝 Connect
+## About
+
+**Seema Kumari**
+Data Analyst | Python · SQL · Power BI | Full-stack analytics — ETL, advanced SQL, and executive dashboard storytelling
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Seema%20Kumari-0A66C2?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/seema-kumari-375763308/)
 [![Email](https://img.shields.io/badge/Email-seemakri136@gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:seemakri136@gmail.com)
